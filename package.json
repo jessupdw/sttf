@@ -1,0 +1,9 @@
+{
+    "name": "S.T.T.F",
+    "version": "0.0.1",
+    "dependencies": {
+        "mongoose": "3.x",
+        "express": "3.x",
+        "swig": "1.x"
+    }
+}

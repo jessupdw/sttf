@@ -1,0 +1,81 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<form class="form-log" action="/match" role="form" method="post">
+
+    <div class="panel panel-primary">
+
+        <div class="panel-heading">
+            <h3 class="panel-title">Log your match</h3>
+        </div>
+
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-xs-6">
+                    <h4 class="text-center">Players</h4>
+                </div>
+                <div class="col-xs-2">
+                    <h5 class="text-center">Game 1</h5>
+                </div>
+                <div class="col-xs-2">
+                    <h5 class="text-center">Game 2</h5>
+                </div>
+                <div class="col-xs-2">
+                    <h5 class="text-center">Game 3</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="input-group">
+                        <span class="input-group-addon">#1</span>
+                        <select class="form-control" name="p1">
+                            <option selected="yes">Select a player</option>
+                            {% for player in players %}
+                            <option value="{{player._id}}">{{player.name.first}} {{player.name.last}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="col-xs-2">
+                    <input type="text" class="form-control" placeholder="0" name="p1_g1">
+                </div>
+                <div class="col-xs-2">
+                    <input type="text" class="form-control" placeholder="0" name="p1_g2">
+                </div>
+                <div class="col-xs-2">
+                    <input type="text" class="form-control" placeholder="0" name="p1_g3">
+                </div>
+            </div>
+
+            <br />
+
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="input-group">
+                        <span class="input-group-addon">#2</span>
+                        <select class="form-control" name="p2">
+                            <option selected="yes">Select a player</option>
+                            {% for player in players %}
+                            <option value="{{player._id}}">{{player.name.first}} {{player.name.last}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="col-xs-2">
+                    <input type="text" class="form-control" placeholder="0" name="p2_g1">
+                </div>
+                <div class="col-xs-2">
+                    <input type="text" class="form-control" placeholder="0" name="p2_g2">
+                </div>
+                <div class="col-xs-2">
+                    <input type="text" class="form-control" placeholder="0" name="p2_g3">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <button class="btn btn-lg btn-primary pull-right" type="submit">Save</button>
+
+</form>
+{% endblock %}
