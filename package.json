@@ -2,8 +2,9 @@
     "name": "S.T.T.F",
     "version": "0.0.1",
     "dependencies": {
-        "mongoose": "3.x",
-        "express": "3.x",
-        "swig": "1.x"
+        "mongoskin": "0.6.x",
+        "express": "3.4.x",
+        "express-validator": "0.8.x",
+        "express-hbs": "0.2.x"
     }
 }

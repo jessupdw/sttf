@@ -9,14 +9,15 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-        <title>{{ title }} | Snagajob Table Tennis Federation (S.T.T.F)</title>
+        <title>{{title}} | Snagajob Table Tennis Federation (S.T.T.F)</title>
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="stylesheet" href="css/bootstrap.min.css">
-        {% for style in styles %}
-        <link rel="stylesheet" href="{{ style.href }}">
-        {% endfor %}
+
+        {{#each styles}}
+        <link rel="stylesheet" href="{{this}}">
+        {{/each}}
 
     </head>
 
@@ -35,9 +36,11 @@
 
             </div>
 
-            {% block content %}{% endblock %}
+            {{{body}}}
 
         </div>
+
+        {{{block 'scripts'}}}
 
     </body>
 
