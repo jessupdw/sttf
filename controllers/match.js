@@ -29,12 +29,20 @@ exports.post = function(req, res) {
 
     var match = new Match();
 
-    match.players = {
-        player: req.body.p1,
-        game_1: req.body.p1_g1,
-        game_2: req.body.p1_g2,
-        game_3: req.body.p1_g3
-    };
+    match.players = [
+        {
+            player: Schema.ObjectId(req.body.p1),
+            game_1: req.body.p1_g1,
+            game_2: req.body.p1_g2,
+            game_3: req.body.p1_g3
+        },
+        {
+            player: Schema.ObjectId(req.body.p2),
+            game_1: req.body.p2_g1,
+            game_2: req.body.p2_g2,
+            game_3: req.body.p2_g3
+        },
+    ];
 
     match.save()
 
