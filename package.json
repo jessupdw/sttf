@@ -2,6 +2,7 @@
     "name": "S.T.T.F",
     "version": "0.0.1",
     "dependencies": {
+        "mongoose": "3.6.x",
         "mongoskin": "0.6.x",
         "express": "3.4.x",
         "express-validator": "0.8.x",
