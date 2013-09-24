@@ -1,7 +1,6 @@
 // dependencies
-var mongoose = require('mongoose');
-var Match    = require('../models/match');
-
+var mongoose = require('mongoose'),
+    Match = require('../models/match');
 
 // GET
 exports.get = function(req, res) {
@@ -30,20 +29,20 @@ exports.post = function(req, res) {
 
     match.players = [
         {
-            player: Schema.ObjectId(req.body.p1),
+            player: mongoose.Schema.ObjectId(req.body.p1),
             game_1: req.body.p1_g1,
             game_2: req.body.p1_g2,
             game_3: req.body.p1_g3
         },
         {
-            player: Schema.ObjectId(req.body.p2),
+            player: mongoose.Schema.ObjectId(req.body.p2),
             game_1: req.body.p2_g1,
             game_2: req.body.p2_g2,
             game_3: req.body.p2_g3
         },
     ];
 
-    match.save()
+    match.save();
 
     res.send(match);
 };

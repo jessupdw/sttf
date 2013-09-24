@@ -1,6 +1,4 @@
-// var matchController  = require('./controllers/match'),
-//     playerController = require('./controllers/player');
-
+var matchController = require('./controllers/match');
 
 module.exports = function(app) {
 
@@ -10,12 +8,12 @@ module.exports = function(app) {
 
     app.get('/log', function(req, res) {
         res.render('log', {
-            title: 'Log Your Match'
+            title: 'Log Your Match',
+            styles: ['css/log.css']
         });
     });
 
-
-    // app.get('/match/:id', matchController.get);
-    // app.get('/player/:id', playerController.get);
+    app.get('/match/:id', matchController.get);
+    app.post('/match', matchController.post);
 
 };
