@@ -1,5 +1,6 @@
 // dependencies
-var mongoskin = require('mongoskin'),
+var mongoose  = require('mongoose'),
+    mongoskin = require('mongoskin'),
     express   = require('express'),
     validator = require('express-validator'),
     hbs       = require('express-hbs'),
@@ -8,7 +9,11 @@ var mongoskin = require('mongoskin'),
 
 // application
 var app = module.exports = express();
-app.set('db', mongoskin.db(config.mongo.uri, {safe: true}));
+
+
+// database
+app.set('db', mongoskin.db(config.mongo.uri, {safe: true})); // mongoskin
+mongoose.connect(config.mongo.uri); // mongoosejs
 
 
 /**
