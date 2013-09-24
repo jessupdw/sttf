@@ -1,6 +1,5 @@
 // dependencies
 var mongoose = require('mongoose');
-var Schema   = mongoose.Schema;
 var Match    = require('../models/match');
 
 

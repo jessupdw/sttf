@@ -1,7 +1,4 @@
-{% extends 'layout.html' %}
-
-{% block content %}
-<form class="form-log" action="/match" role="form" method="post">
+ <form class="form-log" action="/match" role="form" method="post">
 
     <div class="panel panel-primary">
 
@@ -30,9 +27,7 @@
                         <span class="input-group-addon">#1</span>
                         <select class="form-control" name="p1">
                             <option selected="yes">Select a player</option>
-                            {% for player in players %}
-                            <option value="{{player._id}}">{{player.name.first}} {{player.name.last}}</option>
-                            {% endfor %}
+                            {{players}}
                         </select>
                     </div>
                 </div>
@@ -43,7 +38,7 @@
                     <input type="text" class="form-control" placeholder="0" name="p1_g2">
                 </div>
                 <div class="col-xs-2">
-                    <input type="text" class="form-control" placeholder="0" name="p1_g3">
+                    <input type="text" class="form-control" placeholder="" name="p1_g3">
                 </div>
             </div>
 
@@ -55,9 +50,7 @@
                         <span class="input-group-addon">#2</span>
                         <select class="form-control" name="p2">
                             <option selected="yes">Select a player</option>
-                            {% for player in players %}
-                            <option value="{{player._id}}">{{player.name.first}} {{player.name.last}}</option>
-                            {% endfor %}
+                            {{players}}
                         </select>
                     </div>
                 </div>
@@ -68,7 +61,7 @@
                     <input type="text" class="form-control" placeholder="0" name="p2_g2">
                 </div>
                 <div class="col-xs-2">
-                    <input type="text" class="form-control" placeholder="0" name="p2_g3">
+                    <input type="text" class="form-control" placeholder="" name="p2_g3">
                 </div>
             </div>
         </div>
@@ -78,4 +71,3 @@
     <button class="btn btn-lg btn-primary pull-right" type="submit">Save</button>
 
 </form>
-{% endblock %}

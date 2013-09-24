@@ -5,7 +5,7 @@ module.exports = {
     "listen": process.env.VCAP_APP_PORT || 3000,
 
     "mongo": {
-        "uri": "mongodb://localhost/STTF"
+        "uri": "mongodb://localhost/STTF?auto_reconnect=true"
     }
 
 };
