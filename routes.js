@@ -1,4 +1,5 @@
 var matchController = require('./controllers/match');
+var playerController = require('./controllers/player');
 
 module.exports = function(app) {
 
@@ -20,4 +21,13 @@ module.exports = function(app) {
     app.get('/match/:id', matchController.get);
     app.post('/match', matchController.post);
 
+	app.get('/playeradd', function(req, res) {
+        res.render('playeradd', {
+             req: res,
+             title: 'Add a Player',
+             styles: ['css/playeradd.css']   
+        });
+    });
+	
+	app.post('/player', playerController.post);
 };
