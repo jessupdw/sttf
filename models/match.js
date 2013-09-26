@@ -1,15 +1,16 @@
 // dependencies
-var mongoose = require('mongoose');
-
+var mongoose = require('mongoose'),
+    player   = require('./player');
 
 // schema
 var matchSchema = new mongoose.Schema({
 
+    _id: mongoose.Schema.ObjectId,
     players: [{
-        player: { type: mongoose.Schema.ObjectId, ref: 'Player' },
-        game_1: { type: Number, required: true },
-        game_2: { type: Number, required: true },
-        game_3: { type: Number }
+        _id:    { type: mongoose.Schema.ObjectId, ref: 'Player', required: true },
+        game_1: { type: Number, min: 1, max: 99, required: true },
+        game_2: { type: Number, min: 1, max: 99, required: true },
+        game_3: { type: Number, min: 1, max: 99 }
     }]
 
 });

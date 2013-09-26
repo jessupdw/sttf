@@ -5,9 +5,11 @@ var mongoose = require('mongoose');
 // schema
 var playerSchema = new mongoose.Schema({
 
+    _id: mongoose.Schema.ObjectId,
+
     name: {
-        first: { type: String, required: true },
-        last:  { type: String, required: true }
+        first: { type: String, trim: true, required: true },
+        last:  { type: String, trim: true, required: true }
     },
 
     rank: Number

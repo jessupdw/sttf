@@ -1,6 +1,6 @@
 // dependencies
 var mongoose = require('mongoose');
-var Player   = require('../models/player.js');
+var Player   = require('../models/player');
 
 
 // GET
@@ -17,7 +17,23 @@ exports.get = function(req, res) {
                 res.json(player);
             }
         }
-
     });
+};
 
+exports.post = function (req, res){
+
+  console.log(req.body);  
+  var player  = new Player({
+      name : { 
+        first: req.body.p_fn,
+        last: req.body.p_ln
+      }
+  });
+
+  console.log(player);
+
+  player.save(function (err) {
+  console.log(err)});
+
+  res.send(player);
 };
