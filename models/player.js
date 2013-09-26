@@ -25,15 +25,17 @@ playerSchema.virtual('name.full').get(function () {
 // pre-save hook
 playerSchema.pre('save', function(next) {
     // existing player, move on
-    if (!this.isNew) return next();
+    if (!this.isNew) next();
 
     // automatically rank the player at the bottom of the ladder
+    var self = this;
     var Player = mongoose.model('Player');
     Player.count(function (err, count) {
-        if (!err) this.rank = count + 1;
-    });
+        if (!err)
+            self.rank = count + 1;
 
-    return next();
+        next();
+    });
 });
 
 
