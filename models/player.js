@@ -12,7 +12,13 @@ var playerSchema = new mongoose.Schema({
         last:  { type: String, trim: true, required: true }
     },
 
-    rank: Number
+    email: { type: String, trim: true, required: true },
+
+    nickname: { type: String, default: '' },
+
+    rank: Number,
+
+    createDate: { type: Date, default: Date.now }
 });
 
 
@@ -20,6 +26,25 @@ var playerSchema = new mongoose.Schema({
 playerSchema.virtual('name.full').get(function () {
     return this.name.first + ' ' + this.name.last;
 });
+
+
+// validators
+playerSchema.path('email').validate(function (email) {
+    return email.length;
+}, 'Email cannot be blank');
+
+playerSchema.path('email').validate(function (email, fn) {
+    var Player = mongoose.model('Player');
+
+    // Check only when it is a new user or when email field is modified
+    if (this.isNew || this.isModified('email')) {
+        Player.find({ email: email }).exec(function (err, players) {
+            fn(!err && players.length === 0);
+        })
+    } else {
+        fn(true);
+    }
+}, 'Email already exists');
 
 
 // pre-save hook
