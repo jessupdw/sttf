@@ -24,10 +24,12 @@ exports.post = function (req, res){
 
   console.log(req.body);  
   var player  = new Player({
-      name : { 
+      name: {
         first: req.body.p_fn,
         last: req.body.p_ln
-      }
+      },
+      email: req.body.p_em,
+      nickname: req.body.p_nn
   });
 
   console.log(player);
