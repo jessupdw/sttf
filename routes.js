@@ -5,14 +5,14 @@ module.exports = function(app) {
 
     app.get('/', function(req, res) {
         res.render('index', {
-            req: res,
+            req: req,
             title: 'Home'
         });
     });
 
     app.get('/log', function(req, res) {
         res.render('log', {
-            req: res,
+            req: req,
             title: 'Log Your Match',
             styles: ['css/log.css']
         });
@@ -23,11 +23,11 @@ module.exports = function(app) {
 
 	app.get('/playeradd', function(req, res) {
         res.render('playeradd', {
-             req: res,
+             req: req,
              title: 'Add a Player',
-             styles: ['css/playeradd.css']   
+             styles: ['css/playeradd.css']
         });
     });
-	
+
 	app.post('/player', playerController.post);
 };
