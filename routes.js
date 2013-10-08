@@ -1,3 +1,5 @@
+var Player = require('./models/player');
+
 var matchController = require('./controllers/match');
 var playerController = require('./controllers/player');
 
@@ -11,10 +13,14 @@ module.exports = function(app) {
     });
 
     app.get('/log', function(req, res) {
-        res.render('log', {
-            req: req,
-            title: 'Log Your Match',
-            styles: ['css/log.css']
+        Player.find({}, function (error, players) {
+            console.log(players);
+            res.render('log', {
+                req: req,
+                players: players,
+                title: 'Log Your Match',
+                styles: ['css/log.css']
+            });
         });
     });
 
