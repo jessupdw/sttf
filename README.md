@@ -1,0 +1,2 @@
+# sttf
+### a Sails application
