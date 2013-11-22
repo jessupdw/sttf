@@ -42,20 +42,31 @@ module.exports = {
             max: 999 // just because
         },
 
-        // custom instance method
+
+        /**
+         * Custom Instance Methods.
+         */
+
+        // concatenate and return the first & last name
         fullName: function() {
             return this.firstName + ' ' + this.lastName;
         }
 
     },
 
-    // lifecycle callbacks
+    
+    /**
+     * Lifecycle Callbacks.
+     */
+
+     // determine the proper rank for new players
     beforeCreate: function(values, next) {
-        Player.find().sort('rank').limit(1).done(function(err, player) {
+        Player.find().sort('rank DESC').limit(1).done(function(err, player) {
             if (err) {
                 return next(err);
             }
             else {
+                console.log(player);
                 if (player.length == 1) {
                     values.rank = player[0].rank + 1;
                 }
