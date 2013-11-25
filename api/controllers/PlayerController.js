@@ -29,21 +29,15 @@ module.exports = {
         }).done(function (err, player) {
             // Error handling
             if (err) {
-                return console.log(err);
+                console.log(err)
+                res.json(err);
             }
 
             // The User was created successfully!
             else {
-                console.log("User created:", player);
                 res.view({ player: player });
             }
         });
     },
-
-    /**
-     * Overrides for the settings in `config/controllers.js`
-     * (specific to PlayerController)
-     */
-    _config: {}
 
 };

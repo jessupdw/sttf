@@ -1,3 +1,9 @@
 <div class="jumbotron">
     <h1>The Snagajob Table Tennins Federation</h1>
 </div>
+
+<ol>
+	<% _.each(players, function (player) { %>
+		<li><%= player.fullName() %> ("<%= player.nickname %>")</li>
+	<% }) %>
+</ol>
