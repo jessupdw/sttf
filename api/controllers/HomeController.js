@@ -18,14 +18,12 @@
 module.exports = {
 
     index: function (req, res) {
-        Player.find().sort('rank ASC').done(function (err, players) {
-            if (err) {
-                console.log(err);
-                res.json(err);
-            }
-            else {
-                res.view({ players: players });
-            }
+        var players = new Array();
+
+        Ladder.getLatest(function (err, ladder) {
+        	if (err) throw err;
+
+    		res.view({ players: ladder.players });
         });
     }
 

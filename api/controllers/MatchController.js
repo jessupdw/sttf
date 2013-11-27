@@ -20,7 +20,7 @@ module.exports = {
 	log: function (req, res) {
 		Player.find().done(function (err, players) {
 			if (err) {
-				console.log(err);
+				sails.log(err);
 				res.json(err);
 			}
 			else {
@@ -43,17 +43,67 @@ module.exports = {
 		};
 
 		Match.create(data).done(function (err, match) {
+
 			// Error handling
-			if (err) {
-				console.log(err);
-				res.json(err);
-			}
+			if (err) throw err;
 
 			// The Match was created successfully!
 			else {
-				Player.findOne(match.winner_id).done(function (err, winner) {
-					res.view({ winner: winner });
+
+				Ladder.getLatest(function (err, ladder) {
+					if (err) throw err;
+
+					var current_ladder = ladder.players;
+		            var winner_current_position = current_ladder.indexOf(match.winner_id);
+		            var loser_current_position  = current_ladder.indexOf(match.loser_id);
+
+		            // if a match is forfeited, the loser moves to the end of the ladder
+		            // and the other player remains where they are
+		            if (match.match_type == 'forfeit') {
+		                // new order of the ladder
+		                var new_ladder = new Array();
+
+		                for (var i = 0; i < current_ladder.length; i++) {
+		                    if (current_ladder[i] != loser) {
+		                        new_ladder.push(current_ladder[i]);
+		                    }
+		                }
+
+		                new_ladder.push(loser);
+		                current_ladder = new_ladder;
+		            }
+
+		            // if this is a normal scored match, then we handle swapping the winner / loser
+		            // based on their current standings
+		            else {
+		                // new order of the ladder.. need to copy the array or else it acts as a pointer
+		                var ladder_reference = current_ladder.slice(0);
+
+		                if (winner_current_position > loser_current_position) {
+		                    for (var i = loser_current_position; i <= winner_current_position; i++) {
+		                        sails.log("Index: " + i);
+		                        if (i == loser_current_position) {
+		                            current_ladder[i] = match.winner_id;
+		                        }
+		                        else {
+		                            current_ladder[i] = ladder_reference[i-1];
+		                        }
+		                    }
+		                }
+		            }
+
+		            Ladder.create({
+		                event_type: 'match',
+		                event_id: match.id,
+		                players: current_ladder
+		            }).done(function (err, ldr) {
+		                if (err) throw err;
+
+						res.view({ ladder: ldr, winner: match.winner_id });
+		            });
+
 				});
+
 			}
 		});
 	}
