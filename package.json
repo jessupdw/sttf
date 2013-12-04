@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
     "name": "S.T.T.F",
     "version": "0.0.1",
     "dependencies": {
@@ -9,3 +10,26 @@
         "express-hbs": "0.2.x"
     }
 }
+=======
+    "name": "sttf",
+    "private": true,
+    "version": "0.0.0",
+    "description": "a Sails application",
+    "dependencies": {
+        "sails": "0.9.7",
+        "grunt": "0.4.1",
+        "sails-disk": "~0.9.0",
+        "sails-mongo": "~0.9.6",
+        "ejs": "0.8.4",
+        "optimist": "0.3.4"
+    },
+    "scripts": {
+        "start": "node app.js",
+        "debug": "node debug app.js"
+    },
+    "main": "app.js",
+    "repository": "",
+    "author": "",
+    "license": ""
+}
+>>>>>>> 544ed667a0a6f21291e07a58458b91985203b896

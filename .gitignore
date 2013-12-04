@@ -1,3 +1,18 @@
+<<<<<<< HEAD
+=======
+########################
+# sails
+########################
+.sails
+.waterline
+.rigging
+.tmp
+
+
+########################
+# node.js / npm
+########################
+>>>>>>> 544ed667a0a6f21291e07a58458b91985203b896
 lib-cov
 *.seed
 *.log
@@ -11,8 +26,31 @@ pids
 logs
 results
 
+<<<<<<< HEAD
 npm-debug.log
 node_modules
 
 .idea
 .DS_Store
+=======
+node_modules
+
+npm-debug.log
+
+
+########################
+# misc / editors
+########################
+*~
+*#
+.DS_STORE
+.netbeans
+nbproject
+.idea
+
+
+########################
+# local config
+########################
+config/local.js
+>>>>>>> 544ed667a0a6f21291e07a58458b91985203b896

@@ -1,0 +1,32 @@
+<!-- signup page -->
+<div class="page-header">
+    <h1><%= __('Signup') %></h1>
+</div>
+
+<h2>Become a member of the S.T.T.F. <small>It won't hurt a bit!</small></h2>
+
+<form role="form" class="signup-form" action="/player/save">
+    <div class="form-group row">
+        <div class="col-xs-12">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" name="firstName" class="form-control" placeholder="First Name" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-xs-12">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Last Name" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-xs-12">
+            <label for="nickname">Nickname</label>
+            <input type="text" id="nickname" name="nickname" class="form-control" placeholder="Nickname" />
+        </div>
+    </div>
+    <div class="pull-right row">
+        <div class="col-xs-12">
+            <button type="submit" class="btn btn-primary">Signup</button>
+        </div>
+    </div>
+</form>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // dependencies
 var mongoose  = require('mongoose'),
     mongoskin = require('mongoskin'),
@@ -88,3 +89,7 @@ require('./routes')(app);
 
 // start the server
 app.listen(config.listen);
+=======
+// Start sails and pass it command line arguments
+require('sails').lift(require('optimist').argv);
+>>>>>>> 544ed667a0a6f21291e07a58458b91985203b896
