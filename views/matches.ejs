@@ -1,0 +1,46 @@
+<h1>Matches</h1>
+<hr>
+
+<div class="table-responsive">
+  <table class="table table-striped table-hover matches">
+    <thead>
+      <tr>
+        <th>Challenger</th>
+        <th>Defender</th>
+        <th>Game 1</th>
+        <th>Game 2</th>
+        <th>Game 3</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% _.each(matches, function (match) { %>
+        <tr>
+          <td data-player-id="<%= match.challenger.id %>">
+            &quot;<%= match.challenger.nickname %>&quot; <%= match.challenger.lastName %>
+            <% if (match.winner.id == match.challenger.id) { %>
+              <i class="glyphicon glyphicon-ok"></i>
+              <i class="glyphicon glyphicon-arrow-up"></i>
+            <% } %>
+              <i class="filter"></i>
+          </td>
+          <td data-player-id="<%= match.defender.id %>">
+            &quot;<%= match.defender.nickname   %>&quot; <%= match.defender.lastName %>
+            <% if (match.winner.id == match.defender.id) { %>
+              <i class="glyphicon glyphicon-ok"></i>
+            <% } %>
+            <i class="filter"></i>
+          </td>
+          <td><%= match.challenger_game1 %>-<%= match.defender_game1 %></td>
+          <td><%= match.challenger_game2 %>-<%= match.defender_game2 %></td>
+          <td>
+            <% if(match.challenger_game3 > 0 && match.defender_game3 > 0) {%>
+             <%= match.challenger_game3 %>-<%= match.defender_game3 %>
+            <% } %>
+          </td>
+          <td><%= utility.formatDate(match.createdAt, "MMM Do") %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>

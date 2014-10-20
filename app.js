@@ -1,95 +1,52 @@
-<<<<<<< HEAD
-// dependencies
-var mongoose  = require('mongoose'),
-    mongoskin = require('mongoskin'),
-    express   = require('express'),
-    validator = require('express-validator'),
-    hbs       = require('express-hbs'),
-    config    = require('./config');
-
-
-// application
-var app = module.exports = express();
-
-
-// database
-app.set('db', mongoskin.db(config.mongo.uri, {safe: true})); // mongoskin
-mongoose.connect(config.mongo.uri); // mongoosejs
-
-
 /**
- * Middleware
+ * app.js
+ *
+ * Use `app.js` to run your app without `sails lift`.
+ * To start the server, run: `node app.js`.
+ *
+ * This is handy in situations where the sails CLI is not relevant or useful.
+ *
+ * For example:
+ *   => `node app.js`
+ *   => `forever start app.js`
+ *   => `node debug app.js`
+ *   => `modulus deploy`
+ *   => `heroku scale`
+ *
+ *
+ * The same command-line arguments are supported, e.g.:
+ * `node app.js --silent --port=80 --prod`
  */
 
-// session support
-app.use(express.cookieParser('s.t.t.f'));
-app.use(express.session());
+// Ensure a "sails" can be located:
+var sails;
+try {
+	sails = require('sails');
+} catch (e) {
+	console.error('To run an app using `node app.js`, you usually need to have a version of `sails` installed in the same directory as your app.');
+	console.error('To do that, run `npm install sails`');
+	console.error('');
+	console.error('Alternatively, if you have sails installed globally (i.e. you did `npm install -g sails`), you can use `sails lift`.');
+	console.error('When you run `sails lift`, your app will still use a local `./node_modules/sails` dependency if it exists,');
+	console.error('but if it doesn\'t, the app will run with the global sails instead!');
+	return;
+}
 
-// parse request bodies (req.body)
-app.use(express.bodyParser());
+// Try to get `rc` dependency
+var rc;
+try {
+	rc = require('rc');
+} catch (e0) {
+	try {
+		rc = require('sails/node_modules/rc');
+	} catch (e1) {
+		console.error('Could not find dependency: `rc`.');
+		console.error('Your `.sailsrc` file(s) will be ignored.');
+		console.error('To resolve this, run:');
+		console.error('npm install rc --save');
+		rc = function () { return {}; };
+	}
+}
 
-// support _method (PUT in forms etc)
-app.use(express.methodOverride());
-
-// input validation support
-app.use(validator());
-
-// serve static files from the /public directory
-app.use(express.static(__dirname + '/public'));
-
-// define a custom res.message() method which stores messages in the session
-app.response.message = function(msg) {
-
-    // reference `req.session` via the `this.req` reference
-    var sess = this.req.session;
-
-    // simply add the msg to an array for later
-    sess.messages = sess.messages || [];
-    sess.messages.push(msg);
-
-    return this;
-
-};
-
-// expose the "messages" local variable when views are rendered
-app.use(function(req, res, next) {
-
-    var msgs = req.session.messages || [];
-
-    // expose "messages" local variable
-    res.locals.messages = msgs;
-
-    // expose "hasMessages"
-    res.locals.hasMessages = !! msgs.length;
-
-    next();
-
-    // empty or "flush" the messages so they don't build up
-    req.session.messages = [];
-
-});
-
-// view engine
-app.engine('html', hbs.express3({
-    partialsDir: __dirname + '/views/partials',
-    layoutsDir: __dirname + '/views/layouts',
-    defaultLayout: __dirname + '/views/layouts/default.html',
-    contentHelperName: 'content'
-}));
-app.set('view engine', 'html');
-app.set('views', __dirname + '/views');
-
-
-/**
- * Routing & Controllers
- */
-require('./helpers')(app, hbs);
-require('./routes')(app);
-
-
-// start the server
-app.listen(config.listen);
-=======
-// Start sails and pass it command line arguments
-require('sails').lift(require('optimist').argv);
->>>>>>> 544ed667a0a6f21291e07a58458b91985203b896
+// Start server
+sails.lift(rc('sails'));
